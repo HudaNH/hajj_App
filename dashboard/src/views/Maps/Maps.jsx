@@ -7,25 +7,20 @@ import {
   Marker
 } from "react-google-maps";
 
-const locations = [{ lat: 21.372494, lng: 39.851569 }, 
-  { lat: 21.373495, lng: 39.852579 }, 
-  { lat: 21.374496, lng: 39.853589 },
-  { lat: 21.375497, lng: 39.854599 }, 
-  { lat: 21.376498, lng: 39.855569 }];
-
 const CustomMap = withScriptjs(
   withGoogleMap(props => {
     
-    const markers = locations.map((location, index) => (
+    const markers = props.crowd.map((location, index) => (
       <Marker position={location} key={index} />
     ));
-
+    console.log(props.position);
     return (
     <GoogleMap
       defaultZoom={13}
-      defaultCenter={{ lat: 21.375251, lng: 39.851559 }}
+      center={props.position}
+      defaultCenter={props.position}
       defaultOptions={{
-        scrollwheel: false,
+        scrollwheel: true,
         zoomControl: true
       }}
     >
@@ -38,12 +33,15 @@ const CustomMap = withScriptjs(
 );
 
 function Maps({ ...prop }) {
+  
   return (
     <CustomMap 
       googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQJq13e28LYxO7CuCQYbuL2tzfKDn0iao&callback=initMap"
       loadingElement={<div style={{ height: `100%` }} />}
       containerElement={<div style={{ height: `100vh` }} />}
       mapElement={<div style={{ height: `100%` }} />}
+      crowd={prop.crowd}
+      position={prop.position}
     />
   );
 }

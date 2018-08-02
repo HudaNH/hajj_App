@@ -1,22 +1,11 @@
 import React, { Component } from "react";
 import ChartistGraph from "react-chartist";
 import { Grid, Row, Col, ButtonToolbar, Button } from "react-bootstrap";
+import {minaCrowd, arafatCrowd, muzdalifahCrowd} from "data/crowd";
 
 import { Card } from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
-import { Tasks } from "components/Tasks/Tasks.jsx";
-import {
-  dataPie,
-  legendPie,
-  dataSales,
-  optionsSales,
-  responsiveSales,
-  legendSales,
-  dataBar,
-  optionsBar,
-  responsiveBar,
-  legendBar
-} from "variables/Variables.jsx";
+import { legendSales } from "variables/Variables.jsx";
 import Maps from "views/Maps/Maps";
 
 class Dashboard extends Component {
@@ -27,8 +16,12 @@ class Dashboard extends Component {
     this.updateRegion = this.updateRegion.bind(this);
 
     this.state = {
-      region: "Mina"    
-
+      region: {
+        name: "Mina",
+        capacity: "20000",
+        crowd: minaCrowd,
+        position: {lat: 21.416087, lng: 39.894372}
+      }   
     };
   }
   
@@ -48,7 +41,35 @@ class Dashboard extends Component {
   }
 
   updateRegion(event) {
-
+    var selectedRegion = event.target.innerText;
+    if(selectedRegion === "Mina") {
+      this.setState({
+        region: {
+          name: "Mina", 
+          capacity: "20000",
+          crowd: minaCrowd,
+          position: {lat: 21.416087, lng: 39.894372}
+        }
+      });  
+    } else if (selectedRegion === "Arafat") {
+      this.setState({
+        region: {name: "Arafat", 
+        capacity: "40000",
+        crowd: arafatCrowd,
+        position: {lat: 21.353586, lng: 39.977915}
+      }
+      });
+    } else if (selectedRegion === "Muzdalifah") {
+      this.setState({
+        region: {
+          name: "Muzdalifah", 
+          capacity: "70000",
+          crowd: muzdalifahCrowd,
+          position: {lat: 21.387778, lng: 39.885511}
+        }
+      });
+    }
+    
   }
 
   render() {
@@ -60,7 +81,7 @@ class Dashboard extends Component {
               <StatsCard
                 bigIcon={<i className="pe-7s-server text-warning" />}
                 statsText="Capacity"
-                statsValue="1000"
+                statsValue={this.state.region.capacity}
                 statsIcon={<i className="fa fa-refresh" />}
                 statsIconText="Updated now"
               />
@@ -83,33 +104,24 @@ class Dashboard extends Component {
                 statsIconText="In the last hour"
               />
             </Col>
-            {/* <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="fa fa-twitter text-info" />}
-                statsText="Followers"
-                statsValue="+45"
-                statsIcon={<i className="fa fa-refresh" />}
-                statsIconText="Updated now"
-              />
-            </Col> */}
           </Row>
           <Row>
             <Col md={12}>
               <Card
                 statsIcon="fa fa-history"
                 id="chartHours"
-                title={this.state.region}
+                title={this.state.region.name}
                 category="24 Hours performance"
                 stats="Updated 3 minutes ago"
                 content={
                   <div className="ct-chart">
                     <ButtonToolbar style={{marginBottom: "10px"}}>
                       <Button bsStyle="primary" onClick={this.updateRegion} >Mina</Button>
-                      <Button bsStyle="primary">Arafat</Button>
-                      <Button bsStyle="primary">Muzdalifah</Button>
+                      <Button bsStyle="primary" onClick={this.updateRegion} >Arafat</Button>
+                      <Button bsStyle="primary" onClick={this.updateRegion} >Muzdalifah</Button>
                     </ButtonToolbar>
               
-                    <Maps />
+                    <Maps crowd={this.state.region.crowd} position={this.state.region.position} />
                     {/* <ChartistGraph
                       data={dataSales}
                       type="Line"
@@ -123,67 +135,8 @@ class Dashboard extends Component {
                 }
               />
             </Col>
-            {/* <Col md={4}>
-              <Card
-                statsIcon="fa fa-clock-o"
-                title="Email Statistics"
-                category="Last Campaign Performance"
-                stats="Campaign sent 2 days ago"
-                content={
-                  <div
-                    id="chartPreferences"
-                    className="ct-chart ct-perfect-fourth"
-                  >
-                    <ChartistGraph data={dataPie} type="Pie" />
-                  </div>
-                }
-                legend={
-                  <div className="legend">{this.createLegend(legendPie)}</div>
-                }
-              />
-            </Col> */}
+
           </Row>
-
-          {/* <Row>
-            <Col md={6}>
-              <Card
-                id="chartActivity"
-                title="2014 Sales"
-                category="All products including Taxes"
-                stats="Data information certified"
-                statsIcon="fa fa-check"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataBar}
-                      type="Bar"
-                      options={optionsBar}
-                      responsiveOptions={responsiveBar}
-                    />
-                  </div>
-                }
-                legend={
-                  <div className="legend">{this.createLegend(legendBar)}</div>
-                }
-              />
-            </Col>
-
-            <Col md={6}>
-              <Card
-                title="Tasks"
-                category="Backend development"
-                stats="Updated 3 minutes ago"
-                statsIcon="fa fa-history"
-                content={
-                  <div className="table-full-width">
-                    <table className="table">
-                      <Tasks />
-                    </table>
-                  </div>
-                }
-              />
-            </Col>
-          </Row> */}
         </Grid>
       </div>
     );
