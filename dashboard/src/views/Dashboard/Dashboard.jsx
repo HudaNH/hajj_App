@@ -20,7 +20,8 @@ class Dashboard extends Component {
         name: "Mina",
         capacity: "20000",
         crowd: minaCrowd,
-        position: {lat: 21.416087, lng: 39.894372}
+        position: {lat: 21.416087, lng: 39.894372},
+        crowdCount: 1178
       }   
     };
   }
@@ -48,7 +49,8 @@ class Dashboard extends Component {
           name: "Mina", 
           capacity: "20000",
           crowd: minaCrowd,
-          position: {lat: 21.416087, lng: 39.894372}
+          position: {lat: 21.416087, lng: 39.894372},
+          crowdCount: 1178
         }
       });  
     } else if (selectedRegion === "Arafat") {
@@ -56,7 +58,8 @@ class Dashboard extends Component {
         region: {name: "Arafat", 
         capacity: "40000",
         crowd: arafatCrowd,
-        position: {lat: 21.353586, lng: 39.977915}
+        position: {lat: 21.353586, lng: 39.977915},
+        crowdCount: 8179
       }
       });
     } else if (selectedRegion === "Muzdalifah") {
@@ -65,7 +68,8 @@ class Dashboard extends Component {
           name: "Muzdalifah", 
           capacity: "70000",
           crowd: muzdalifahCrowd,
-          position: {lat: 21.387778, lng: 39.885511}
+          position: {lat: 21.387778, lng: 39.885511},
+          crowdCount: 5323
         }
       });
     }
@@ -89,8 +93,8 @@ class Dashboard extends Component {
             <Col lg={4} sm={6}>
               <StatsCard
                 bigIcon={<i className="pe-7s-wallet text-success" />}
-                statsText="Revenue"
-                statsValue="$1,345"
+                statsText="Pilgrim's Count"
+                statsValue={this.state.region.crowdCount}
                 statsIcon={<i className="fa fa-calendar-o" />}
                 statsIconText="Last day"
               />
