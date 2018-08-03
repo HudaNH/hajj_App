@@ -95,11 +95,11 @@ class Dashboard extends Component {
             </Col>
             <Col lg={4} sm={6}>
               <StatsCard
-                bigIcon={<i className="pe-7s-wallet text-success" />}
+                //bigIcon={<i className="pe-7s-wallet text-success" />}
                 statsText="Pilgrim's Count"
                 statsValue={this.state.region.crowdCount}
                 statsIcon={<i className="fa fa-calendar-o" />}
-                statsIconText="Last day"
+                statsIconText="Updated an hour ago"
               />
             </Col>
             <Col lg={4} sm={6}>
