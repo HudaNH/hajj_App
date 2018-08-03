@@ -12,7 +12,7 @@ import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
-
+import Maps from "views/Maps/Maps";
 import avatar from "assets/img/faces/face-3.jpg";
 
 class UserProfile extends Component {
@@ -23,7 +23,7 @@ class UserProfile extends Component {
           <Row>
             <Col md={8}>
               <Card
-                title="Edit Profile"
+                title="Profile"
                 content={
                   <form>
                     <FormInputs
@@ -113,7 +113,7 @@ class UserProfile extends Component {
                     <Row>
                       <Col md={12}>
                         <FormGroup controlId="formControlsTextarea">
-                          <ControlLabel>About Me</ControlLabel>
+                          <ControlLabel>Remarks</ControlLabel>
                           <FormControl
                             rows="5"
                             componentClass="textarea"
@@ -124,9 +124,9 @@ class UserProfile extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Button bsStyle="info" pullRight fill type="submit">
+                    {/* <Button bsStyle="info" pullRight fill type="submit">
                       Update Profile
-                    </Button>
+                    </Button> */}
                     <div className="clearfix" />
                   </form>
                 }
@@ -138,15 +138,15 @@ class UserProfile extends Component {
                 avatar={avatar}
                 name="Mike Andrew"
                 userName="michael24"
-                description={
-                  <span>
-                    "Lamborghini Mercy
-                    <br />
-                    Your chick she so thirsty
-                    <br />
-                    I'm in that two seat Lambo"
-                  </span>
-                }
+                // description={
+                //   <span>
+                //     "Lamborghini Mercy
+                //     <br />
+                //     Your chick she so thirsty
+                //     <br />
+                //     I'm in that two seat Lambo"
+                //   </span>
+                // }
                 socials={
                   <div>
                     <Button simple>
@@ -161,6 +161,7 @@ class UserProfile extends Component {
                   </div>
                 }
               />
+              <div><Maps crowd={[{lat: 21.416087, lng: 39.894372}]} position={{lat: 21.416087, lng: 39.894372}} /></div>
             </Col>
           </Row>
         </Grid>>

@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import ChartistGraph from "react-chartist";
 import { Grid, Row, Col, ButtonToolbar, Button } from "react-bootstrap";
 import {minaCrowd, arafatCrowd, muzdalifahCrowd} from "data/crowd";
 
 import { Card } from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
-import { legendSales } from "variables/Variables.jsx";
 import Maps from "views/Maps/Maps";
 
 class Dashboard extends Component {
@@ -20,8 +18,10 @@ class Dashboard extends Component {
         name: "Mina",
         capacity: "20000",
         crowd: minaCrowd,
-        position: {lat: 21.416087, lng: 39.894372},
-        crowdCount: 1178
+        // position: {lat: 21.416087, lng: 39.894372},
+        position: {lat: 21.460973, lng: 39.856489},
+        crowdCount: 1178,
+        suspicious: 1
       }   
     };
   }
@@ -50,7 +50,8 @@ class Dashboard extends Component {
           capacity: "20000",
           crowd: minaCrowd,
           position: {lat: 21.416087, lng: 39.894372},
-          crowdCount: 1178
+          crowdCount: 1178,
+          suspicious: 1
         }
       });  
     } else if (selectedRegion === "Arafat") {
@@ -59,7 +60,8 @@ class Dashboard extends Component {
         capacity: "40000",
         crowd: arafatCrowd,
         position: {lat: 21.353586, lng: 39.977915},
-        crowdCount: 8179
+        crowdCount: 8179,
+        suspicious: 0
       }
       });
     } else if (selectedRegion === "Muzdalifah") {
@@ -69,7 +71,8 @@ class Dashboard extends Component {
           capacity: "70000",
           crowd: muzdalifahCrowd,
           position: {lat: 21.387778, lng: 39.885511},
-          crowdCount: 5323
+          crowdCount: 5323,
+          suspicious: 0
         }
       });
     }
@@ -102,8 +105,8 @@ class Dashboard extends Component {
             <Col lg={4} sm={6}>
               <StatsCard
                 bigIcon={<i className="pe-7s-graph1 text-danger" />}
-                statsText="Errors"
-                statsValue="23"
+                statsText="Suspicious"
+                statsValue={this.state.region.suspicious}
                 statsIcon={<i className="fa fa-clock-o" />}
                 statsIconText="In the last hour"
               />
@@ -112,13 +115,14 @@ class Dashboard extends Component {
           <Row>
             <Col md={12}>
               <Card
+                style={{height: `48vh`}}
                 statsIcon="fa fa-history"
                 id="chartHours"
                 title={this.state.region.name}
-                category="24 Hours performance"
+                category="Hajj Region"
                 stats="Updated 3 minutes ago"
                 content={
-                  <div className="ct-chart">
+                  <div>
                     <ButtonToolbar style={{marginBottom: "10px"}}>
                       <Button bsStyle="primary" onClick={this.updateRegion} >Mina</Button>
                       <Button bsStyle="primary" onClick={this.updateRegion} >Arafat</Button>
@@ -134,9 +138,9 @@ class Dashboard extends Component {
                     /> */}
                   </div>
                 }
-                legend={
-                  <div className="legend">{this.createLegend(legendSales)}</div>
-                }
+                // legend={
+                //   <div className="legend">{this.createLegend(legendSales)}</div>
+                // }
               />
             </Col>
 

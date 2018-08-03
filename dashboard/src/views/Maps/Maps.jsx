@@ -38,7 +38,7 @@ function Maps({ ...prop }) {
     <CustomMap 
       googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQJq13e28LYxO7CuCQYbuL2tzfKDn0iao&callback=initMap"
       loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `100vh` }} />}
+      containerElement={<div style={{ height: `48vh` }} />}
       mapElement={<div style={{ height: `100%` }} />}
       crowd={prop.crowd}
       position={prop.position}

@@ -3,11 +3,11 @@ import React, { Component } from "react";
 export class UserCard extends Component {
   render() {
     return (
-      <div className="card card-user">
+      <div style={{minHeight: 100}} className="card card-user">
         <div className="image">
           <img src={this.props.bgImage} alt="..." />
         </div>
-        <div className="content">
+        <div>
           <div className="author">
             <a href="#pablo">
               <img
